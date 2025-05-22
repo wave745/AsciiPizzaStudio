@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 210 11% 7%; /* #0d1117 */
+  --foreground: 210 40% 80%; /* #58a6ff */
+  --muted: 210 11% 15%; /* #1c2128 */
+  --muted-foreground: 210 11% 35%; /* #30363d */
+  --popover: 210 11% 7%; /* #0d1117 */
+  --popover-foreground: 210 40% 80%; /* #58a6ff */
+  --card: 210 11% 10%; /* #161b22 */
+  --card-foreground: 210 40% 80%; /* #58a6ff */
+  --border: 210 11% 20%; /* #30363d */
+  --input: 210 11% 15%; /* #1c2128 */
+  --primary: 210 40% 68%; /* #58a6ff */
+  --primary-foreground: 210 11% 7%; /* #0d1117 */
+  --secondary: 210 11% 15%; /* #1c2128 */
+  --secondary-foreground: 210 40% 80%; /* #58a6ff */
+  --accent: 210 11% 15%; /* #1c2128 */
+  --accent-foreground: 210 40% 80%; /* #58a6ff */
+  --destructive: 0 84% 60%; /* #e06c75 */
+  --destructive-foreground: 60 9% 98%; /* #f8f8f2 */
+  --ring: 210 40% 68%; /* #58a6ff */
+  --radius: 0.5rem;
+  
+  /* Custom terminal colors */
+  --terminal-bg: 210 11% 7%; /* #0d1117 */
+  --terminal-blue: 210 40% 68%; /* #58a6ff */
+  --pizza-crust: 45 75% 70%; /* #f0c674 */
+  --pizza-sauce: 0 65% 66%; /* #e06c75 */
+  --pizza-cheese: 45 70% 70%; /* #e5c07b */
+  --pizza-pepperoni: 30 60% 60%; /* #d19a66 */
+  --terminal-green: 120 40% 68%; /* #98c379 */
+}
+
+.dark {
+  --background: 210 11% 7%; /* #0d1117 */
+  --foreground: 210 40% 80%; /* #58a6ff */
+  --muted: 210 11% 15%; /* #1c2128 */
+  --muted-foreground: 210 11% 35%; /* #30363d */
+  --popover: 210 11% 7%; /* #0d1117 */
+  --popover-foreground: 210 40% 80%; /* #58a6ff */
+  --card: 210 11% 10%; /* #161b22 */
+  --card-foreground: 210 40% 80%; /* #58a6ff */
+  --border: 210 11% 20%; /* #30363d */
+  --input: 210 11% 15%; /* #1c2128 */
+  --primary: 210 40% 68%; /* #58a6ff */
+  --primary-foreground: 210 11% 7%; /* #0d1117 */
+  --secondary: 210 11% 15%; /* #1c2128 */
+  --secondary-foreground: 210 40% 80%; /* #58a6ff */
+  --accent: 210 11% 15%; /* #1c2128 */
+  --accent-foreground: 210 40% 80%; /* #58a6ff */
+  --destructive: 0 65% 66%; /* #e06c75 */
+  --destructive-foreground: 60 9% 98%; /* #f8f8f2 */
+  --ring: 210 40% 68%; /* #58a6ff */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-mono antialiased bg-background text-foreground overflow-x-auto;
+    background: hsl(var(--terminal-bg));
+    color: hsl(var(--terminal-blue));
+  }
+}
+
+@layer components {
+  .terminal-window {
+    background: linear-gradient(145deg, hsl(var(--muted)), hsl(var(--background)));
+    border: 2px solid hsl(var(--border));
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+  
+  .ascii-art {
+    line-height: 1.2;
+    white-space: pre;
+    font-variant-ligatures: none;
+    font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+  }
+  
+  .pizza-hover:hover {
+    text-shadow: 0 0 10px currentColor;
+    transition: all 0.3s ease;
+  }
+  
+  .terminal-border {
+    border: 1px solid hsl(var(--border));
+    border-image: repeating-linear-gradient(45deg, hsl(var(--border)), hsl(var(--border)) 2px, transparent 2px, transparent 4px) 1;
+  }
+  
+  .typewriter-text {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .typewriter-text::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: hsl(var(--terminal-blue));
+    animation: blink 1s infinite;
+  }
+  
+  .steam-line {
+    animation: float 2s ease-in-out infinite;
+  }
+  
+  .steam-line:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+  
+  .steam-line:nth-child(3) {
+    animation-delay: 1s;
+  }
+}
+
+@layer utilities {
+  .text-pizza-crust {
+    color: hsl(var(--pizza-crust));
+  }
+  
+  .text-pizza-sauce {
+    color: hsl(var(--pizza-sauce));
+  }
+  
+  .text-pizza-cheese {
+    color: hsl(var(--pizza-cheese));
+  }
+  
+  .text-pizza-pepperoni {
+    color: hsl(var(--pizza-pepperoni));
+  }
+  
+  .text-terminal-green {
+    color: hsl(var(--terminal-green));
+  }
+  
+  .bg-pizza-sauce {
+    background-color: hsl(var(--pizza-sauce));
+  }
+  
+  .bg-terminal-green {
+    background-color: hsl(var(--terminal-green));
+  }
+}
+
+@keyframes typewriter {
+  to { left: 100%; }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.7; }
+  25% { transform: translateY(-5px) translateX(2px); opacity: 1; }
+  50% { transform: translateY(-10px) translateX(-1px); opacity: 0.8; }
+  75% { transform: translateY(-5px) translateX(1px); opacity: 0.9; }
+}
+
+@keyframes pulse-glow {
+  from { box-shadow: 0 0 5px hsl(var(--terminal-blue)); }
+  to { box-shadow: 0 0 20px hsl(var(--terminal-blue)), 0 0 30px hsl(var(--terminal-blue)); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
+.animate-spin-pizza {
+  animation: spin 3s linear infinite;
+}
