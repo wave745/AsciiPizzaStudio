@@ -5,17 +5,35 @@ import PizzaBuilder from "@/components/pizza-builder";
 import PizzaAnimations from "@/components/pizza-animations";
 import RandomPizza from "@/components/random-pizza";
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Copy } from "lucide-react";
+import { useClipboard } from "@/hooks/use-clipboard";
 
 type Section = 'gallery' | 'builder' | 'animations' | 'random' | null;
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<Section>(null);
+  const { copyToClipboard, message } = useClipboard();
+  
+  const contractAddress = "HTMvt5CVKcGNobkvBLtroR6dK5rgNnCt6Vi7Btwopump";
 
   return (
     <div className="min-h-screen bg-background p-4 space-y-4">
-      {/* X.com Community Link */}
-      <div className="flex justify-end mb-2">
+      {/* Top Action Buttons */}
+      <div className="flex justify-end gap-3 mb-2">
+        {/* Copy CA Button */}
+        <motion.button
+          onClick={() => copyToClipboard(contractAddress)}
+          className="flex items-center gap-2 bg-pizza-cheese text-black px-4 py-2 rounded-lg hover:bg-yellow-400 transition-colors border border-yellow-600 font-mono text-sm"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          title="Copy Contract Address"
+        >
+          <Copy className="w-4 h-4" />
+          <span className="hidden sm:inline">Copy CA</span>
+          <span className="sm:hidden">CA</span>
+        </motion.button>
+
+        {/* X.com Community Link */}
         <motion.a
           href="https://twitter.com/i/communities/1925506087979045256"
           target="_blank"
@@ -27,10 +45,25 @@ export default function Home() {
           <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
           </svg>
-          <span className="text-sm">Join Pizza Community</span>
+          <span className="text-sm hidden sm:inline">Join Pizza Community</span>
+          <span className="text-sm sm:hidden">Community</span>
           <ExternalLink className="w-4 h-4" />
         </motion.a>
       </div>
+
+      {/* Copy Message Display */}
+      {message && (
+        <motion.div
+          className="text-center mb-2"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+        >
+          <div className="inline-block bg-terminal-green text-black px-4 py-2 rounded-lg text-sm font-mono">
+            {message}
+          </div>
+        </motion.div>
+      )}
 
       {/* Header Terminal Window */}
       <TerminalWindow title="ASCII Pizza Co. Terminal v1.0">
